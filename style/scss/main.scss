@@ -6,6 +6,16 @@
     @return map-get($font-weights, $weight-name);
 }
 
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+.container{
+    height: 100%;
+}
+
 body{
     font-family: 'Rubik', sans-serif;
 }
@@ -24,7 +34,7 @@ body{
 .upper-container{
     background-image: url("/IP-Address-Tracker/images/pattern-bg.png");
     padding: 1.5rem 5rem;
-    height: 10rem;
+    height: 13rem;
 
     .page-title{
         text-align: center;
@@ -38,7 +48,7 @@ body{
 
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
+    margin: 1rem 0 2rem 0;
 
     .search-input{
         padding: 0.8rem 1rem;
@@ -52,5 +62,71 @@ body{
         border-radius: 0 0.7rem 0.7rem 0;
         border: none;
         background: $very-dark-gray;
+    }
+}
+
+.info-container{
+    background: $white;
+    border-radius: 0.7rem;
+    padding: 0.5rem;
+    height: auto;
+    width: 80%;
+    margin: auto;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    .column{
+        width: 100%;
+        padding: 0.5rem;
+        text-align: center;
+    }
+
+    .info-title{
+        color: $dark-gray;
+        text-transform: uppercase;
+        font-weight: weight(bold);
+        margin-bottom: 0.5rem;
+        font-size: 0.7rem;
+    }
+
+    .info-detail{
+        font-size: 1.3rem;
+        font-weight: weight(medium);
+    }
+
+}
+
+.map-container{
+    background: cyan;
+    height: calc(100% - 13rem);
+}
+
+@media (min-width: $desktop){
+    .info-container{
+        flex-direction: row;
+        padding: 1rem;
+
+        .column{
+            width: 25%;
+            text-align: left;
+            padding: 1rem;
+            border-right: 1px solid $light-gray;
+        }
+        .column:last-child{
+            border: none;
+        }
+
+        .info-title{
+            // font-size: 1rem;
+        }
+
+        .info-detail{
+            font-size: 1.5rem;
+        }
     }
 }
