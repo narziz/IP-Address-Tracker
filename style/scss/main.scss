@@ -1,0 +1,56 @@
+@import 'resets';
+@import 'variables';
+@import 'mixins';
+
+@function weight($weight-name){
+    @return map-get($font-weights, $weight-name);
+}
+
+body{
+    font-family: 'Rubik', sans-serif;
+}
+
+.attribution {
+    @include font-size(11px);
+    // font-size: 11px;
+    text-align: center; 
+
+    a{
+        color: $blue; 
+    }
+}
+
+
+.upper-container{
+    background-image: url("/IP-Address-Tracker/images/pattern-bg.png");
+    padding: 1.5rem 5rem;
+    height: 10rem;
+
+    .page-title{
+        text-align: center;
+        font-size: 24px;
+        color: $white;
+        font-weight: weight(medium);
+    }
+}
+
+.form-container{
+
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+    .search-input{
+        padding: 0.8rem 1rem;
+        border: none;
+        border-radius: 0.7rem 0 0 0.7rem;
+        width: 20rem;
+    }
+
+    .search-btn{
+        padding: 0.8rem 1rem;
+        border-radius: 0 0.7rem 0.7rem 0;
+        border: none;
+        background: $very-dark-gray;
+    }
+}
