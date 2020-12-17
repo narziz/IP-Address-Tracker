@@ -4,12 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-   crossorigin=""/>
-   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-   crossorigin=""></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel="stylesheet" href="style/css/main.css">
@@ -35,17 +32,17 @@
           <h5 class="info-title">IP Address</h5>
           <p class="info-detail">192.212.174.101</p>
         </div>
-  
+
         <div class="column">
           <h5 class="info-title">Location</h5>
           <p class="info-detail">Brooklyn, NY 10001</p>
         </div>
-  
+
         <div class="column">
           <h5 class="info-title">Timezone</h5>
           <p class="info-detail">UTC-05:00</p>
         </div>
-  
+
         <div class="column">
           <h5 class="info-title">ISP</h5>
           <p class="info-detail">SpaceX Starlink</p>
@@ -53,10 +50,10 @@
       </div>
     </div>
 
-    
+
 
     <div class="map-container">
-      <div id='map' style='width: 400px; height: 300px;'></div>
+      <div id='mapCont'></div>
     </div>
 
 
@@ -66,6 +63,7 @@
     </div>
 
   </div>
+
 </body>
 
 </html>

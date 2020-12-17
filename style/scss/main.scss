@@ -72,7 +72,7 @@ body{
     height: auto;
     width: 80%;
     margin: auto;
-
+    z-index: 999;
     position: absolute;
     left: 0;
     right: 0;
@@ -104,6 +104,12 @@ body{
 .map-container{
     background: cyan;
     height: calc(100% - 13rem);
+
+    #mapCont{
+        width: 100%;
+        height: calc(100% - 13rem);; 
+        position: absolute;
+    }
 }
 
 @media (min-width: $desktop){
