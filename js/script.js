@@ -8,12 +8,27 @@ $(document).ready(function () {
         });
     }
 
-    function get_data(ip){
-        var url = 'https://geo.ipify.org/api/v1?apiKey=at_qkkRQqb5bntENNhF9xE38cZ1jUGIW&ipAddress=' + ip;
-        var ip, lng, lat, location, timezone, isp; 
-        console.log(url);
+    function get_data(input_value) {
+        var ip, domain, api_key, url, lng, lat, location, timezone, isp;
+        
+        var ValidIpAddressRegex = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
+        var ValidHostnameRegex = /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/;
 
-        $.getJSON(url, function(data){
+        api_key = 'at_qkkRQqb5bntENNhF9xE38cZ1jUGIW';
+
+        if (ValidIpAddressRegex.test(input_value)) {
+            ip = input_value;
+            url = 'https://geo.ipify.org/api/v1?apiKey=' + api_key + '&ipAddress=' + ip;
+            console.log('IP --> ', ip);
+        } else if (ValidHostnameRegex.test(input_value)) {
+            domain = input_value;
+            url = 'https://geo.ipify.org/api/v1?apiKey=' + api_key + '&domain=' + domain;
+            console.log('Domain --> ', domain);
+        }
+
+
+        console.log(url);
+        $.getJSON(url, function (data) {
             console.log(data);
             ip = data.ip;
             lat = data.location.lat;
@@ -24,13 +39,26 @@ $(document).ready(function () {
 
             display_map(lng, lat);
             create_info_panel(ip, location, timezone, isp);
+        })
+        .fail(function(jqxhr, textStatus, error){
+            $('.error-cont p').text('Please, enter valid search term');
+            $('.error-cont').css('visibility', 'visible');
+            $('#search-input').addClass('input-err');
+            console.log(jqxhr);
+            console.log(textStatus);
+            console.log(error);
+        })
+        .done(function(){
+            $('.error-cont p').text('');
+            $('#search-input').removeClass('input-err');
+            $('.error-cont').css('visibility', 'hidden');
         });
     }
 
-    function create_info_panel(ip, location, timezone, isp){
+    function create_info_panel(ip, location, timezone, isp) {
         $('#ip-address').find('p').text(ip);
         $('#location').find('p').text(location);
-        $('#timezone').find('p').text('UTC'+timezone);
+        $('#timezone').find('p').text('UTC' + timezone);
         $('#isp').find('p').text(isp);
     }
 
@@ -52,22 +80,21 @@ $(document).ready(function () {
             .addTo(map);
     }
 
-    function search_ip(){
+    function search_location() {
         var input_value = $('#search-input').val();
-        console.log('input_value --> ', input_value);
         get_data(input_value);
     }
 
-    $('#search-btn').on('click', function(){
-        search_ip();
+    $('#search-btn').on('click', function () {
+        search_location();
     });
 
-    $('#search-input').on('keypress', function(e){
-        if (e.which == 13){
-            search_ip();
+    $('#search-input').on('keypress', function (e) {
+        if (e.which == 13) {
+            search_location();
             return false
         }
-        
+
     });
 });
 

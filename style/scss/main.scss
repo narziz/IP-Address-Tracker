@@ -48,7 +48,7 @@ body{
 
     display: flex;
     justify-content: center;
-    margin: 1rem 0 2rem 0;
+    margin: 1rem 0 1rem 0;
 
     .search-input{
         padding: 0.8rem 1rem;
@@ -56,13 +56,43 @@ body{
         border-radius: 0.7rem 0 0 0.7rem;
         width: 20rem;
     }
-
+    
     .search-btn{
         padding: 0.8rem 1rem;
         border-radius: 0 0.7rem 0.7rem 0;
         border: none;
         background: $very-dark-gray;
+
+        img{
+            width: 0.5rem;
+        }
     }
+
+    .search-input:hover,
+    .search-btn:hover{
+        cursor: pointer;
+    }
+}
+.error-cont{
+    background: $danger-light;
+    height: 1rem;
+    margin-bottom: 1rem;
+    
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    padding: 0.5rem;
+    border-left: 7px solid $danger;
+    visibility: hidden;
+
+    p{
+        text-align: center;
+        color: $danger;
+    }
+}
+
+.input-err{
+    border: 1px solid $danger !important;
 }
 
 .info-container{
@@ -116,13 +146,13 @@ body{
 
     .upper-container{
         padding: 1.5rem 5rem;
-        height: 12.5rem;
+        height: 14.5rem;
     }
     .map-container{
-        height: calc(100% - 12.5rem);
+        height: calc(100% - 14.5rem);
 
         #mapCont{
-            height: calc(100% - 12.5rem);
+            height: calc(100% - 14.5rem);
         }
     }
     .info-container{
@@ -142,5 +172,8 @@ body{
         .info-detail{
             font-size: 1.5rem;
         }
+    }
+    .error-cont{
+        width: 22rem;
     }
 }
