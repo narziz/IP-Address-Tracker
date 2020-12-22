@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     function get_data(input_value) {
         var ip, domain, api_key, url, lng, lat, location, timezone, isp;
-        
+
         var ValidIpAddressRegex = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
         var ValidHostnameRegex = /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/;
 
@@ -19,15 +19,11 @@ $(document).ready(function () {
         if (ValidIpAddressRegex.test(input_value)) {
             ip = input_value;
             url = 'https://geo.ipify.org/api/v1?apiKey=' + api_key + '&ipAddress=' + ip;
-            console.log('IP --> ', ip);
         } else if (ValidHostnameRegex.test(input_value)) {
             domain = input_value;
             url = 'https://geo.ipify.org/api/v1?apiKey=' + api_key + '&domain=' + domain;
-            console.log('Domain --> ', domain);
         }
 
-
-        console.log(url);
         $.getJSON(url, function (data) {
             console.log(data);
             ip = data.ip;
@@ -40,19 +36,16 @@ $(document).ready(function () {
             display_map(lng, lat);
             create_info_panel(ip, location, timezone, isp);
         })
-        .fail(function(jqxhr, textStatus, error){
-            $('.error-cont p').text('Please, enter valid search term');
-            $('.error-cont').css('visibility', 'visible');
-            $('#search-input').addClass('input-err');
-            console.log(jqxhr);
-            console.log(textStatus);
-            console.log(error);
-        })
-        .done(function(){
-            $('.error-cont p').text('');
-            $('#search-input').removeClass('input-err');
-            $('.error-cont').css('visibility', 'hidden');
-        });
+            .fail(function (jqxhr, textStatus, error) {
+                $('.error-cont p').text('Please, enter valid search term');
+                $('.error-cont').css('visibility', 'visible');
+                $('#search-input').addClass('input-err');
+            })
+            .done(function () {
+                $('.error-cont p').text('');
+                $('#search-input').removeClass('input-err');
+                $('.error-cont').css('visibility', 'hidden');
+            });
     }
 
     function create_info_panel(ip, location, timezone, isp) {
@@ -64,7 +57,6 @@ $(document).ready(function () {
 
     function display_map(lng, lat) {
         var mapid = $('#mapCont').attr('id');
-        console.log(mapid);
 
         mapboxgl.accessToken = 'pk.eyJ1IjoibmFyeml6IiwiYSI6ImNraXJ3cmo3aTA3eW4ycG5seGpvbjltcjAifQ.1rCoykMn2NxdCGyZ3gsbOA';
         var map = new mapboxgl.Map({
