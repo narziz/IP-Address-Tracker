@@ -1,29 +1,9 @@
-
-// window.onload = function () {
-//     var elem = document.getElementById('mapCont');
-//     var elemId = elem.getAttribute('id');
-
-//     mapboxgl.accessToken = 'pk.eyJ1IjoibmFyeml6IiwiYSI6ImNraXJ3cmo3aTA3eW4ycG5seGpvbjltcjAifQ.1rCoykMn2NxdCGyZ3gsbOA';
-//     var map = new mapboxgl.Map({
-//         container: elemId, // container id
-//         style: 'mapbox://styles/mapbox/streets-v11', // style URL
-//         center: [12.550343, 55.665957], // starting position [lng, lat]
-//         zoom: 9 // starting zoom
-//     });
-
-//     var marker = new mapboxgl.Marker({
-//         color: '#2b2b2b'
-//     }).setLngLat([12.550343, 55.665957])
-//         .addTo(map);
-// };
-
 $(document).ready(function () {
     getIp();
 
     function getIp() {
         //to get users ip address for first page launch
         $.getJSON('https://api.ipify.org/?format=json', function (data) {
-            // init_page(data.ip);
             get_data(data.ip);
         });
     }
@@ -63,7 +43,7 @@ $(document).ready(function () {
             container: mapid, // container id
             style: 'mapbox://styles/mapbox/streets-v11', // style URL
             center: [lng, lat], // starting position [lng, lat] 12.550343, 55.665957
-            zoom: 9 // starting zoom
+            zoom: 11 // starting zoom
         });
 
         var marker = new mapboxgl.Marker({
@@ -72,7 +52,23 @@ $(document).ready(function () {
             .addTo(map);
     }
 
+    function search_ip(){
+        var input_value = $('#search-input').val();
+        console.log('input_value --> ', input_value);
+        get_data(input_value);
+    }
 
+    $('#search-btn').on('click', function(){
+        search_ip();
+    });
+
+    $('#search-input').on('keypress', function(e){
+        if (e.which == 13){
+            search_ip();
+            return false
+        }
+        
+    });
 });
 
 

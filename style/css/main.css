@@ -36,8 +36,8 @@ body {
 
 .upper-container {
   background-image: url("/IP-Address-Tracker/images/pattern-bg.png");
-  padding: 1.5rem 5rem;
-  height: 13rem;
+  height: 17rem;
+  padding: 1.5rem 2.5rem;
 }
 
 .upper-container .page-title {
@@ -111,17 +111,27 @@ body {
 }
 
 .map-container {
-  background: cyan;
-  height: calc(100% - 13rem);
+  background: #fff;
+  height: calc(100% - 17rem);
 }
 
 .map-container #mapCont {
   width: 100%;
-  height: calc(100% - 13rem);
+  height: calc(100% - 17rem);
   position: absolute;
 }
 
 @media (min-width: 1140px) {
+  .upper-container {
+    padding: 1.5rem 5rem;
+    height: 12.5rem;
+  }
+  .map-container {
+    height: calc(100% - 12.5rem);
+  }
+  .map-container #mapCont {
+    height: calc(100% - 12.5rem);
+  }
   .info-container {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
