@@ -2,10 +2,25 @@ $(document).ready(function () {
     getIp();
 
     function getIp() {
+
         //to get users ip address for first page launch
-        $.getJSON('https://api.ipify.org/?format=json', function (data) {
-            get_data(data.ip);
+        const url = 'https://api.ipify.org/?format=json';
+        // $.getJSON(url, function (data) {
+        //     get_data(data.ip);
+        // });
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                console.log('ajax data ---> ', data);
+                get_data(data.ip);
+            }
+
         });
+
     }
 
     function get_data(input_value) {
@@ -24,28 +39,63 @@ $(document).ready(function () {
             url = 'https://geo.ipify.org/api/v1?apiKey=' + api_key + '&domain=' + domain;
         }
 
-        $.getJSON(url, function (data) {
-            console.log(data);
-            ip = data.ip;
-            lat = data.location.lat;
-            lng = data.location.lng;
-            location = data.location.city + ', ' + data.location.region;
-            timezone = data.location.timezone;
-            isp = data.isp;
+        // url = 'https://geo.ipify.org/api/v1?apiKey=' + api_key + '&ipAddress=' + input_value;
 
-            display_map(lng, lat);
-            create_info_panel(ip, location, timezone, isp);
-        })
-            .fail(function (jqxhr, textStatus, error) {
+        // $.getJSON(url, function (data) {
+        //     console.log(data);
+        //     ip = data.ip;
+        //     lat = data.location.lat;
+        //     lng = data.location.lng;
+        //     location = data.location.city + ', ' + data.location.region;
+        //     timezone = data.location.timezone;
+        //     isp = data.isp;
+
+        //     create_info_panel(ip, location, timezone, isp);
+        //     display_map(lng, lat);
+
+        // })
+        //     .fail(function (jqxhr, textStatus, error) {
+        //         $('.error-cont p').text('Please, enter valid search term');
+        //         $('.error-cont').css('visibility', 'visible');
+        //         $('#search-input').addClass('input-err');
+        //     })
+        //     .done(function () {
+        //         $('.error-cont p').text('');
+        //         $('#search-input').removeClass('input-err');
+        //         $('.error-cont').css('visibility', 'hidden');
+        //     });
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                console.log('ajax data ------> ', data);
+                ip = data.ip;
+                lat = data.location.lat;
+                lng = data.location.lng;
+                location = data.location.city + ', ' + data.location.region;
+                timezone = data.location.timezone;
+                isp = data.isp;
+
+                create_info_panel(ip, location, timezone, isp);
+                display_map(lng, lat);
+
+                if ($('.error-cont').css('visibility') == 'visible') {
+                    $('.error-cont p').text('');
+                    $('#search-input').removeClass('input-err');
+                    $('.error-cont').css('visibility', 'hidden');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
                 $('.error-cont p').text('Please, enter valid search term');
                 $('.error-cont').css('visibility', 'visible');
                 $('#search-input').addClass('input-err');
-            })
-            .done(function () {
-                $('.error-cont p').text('');
-                $('#search-input').removeClass('input-err');
-                $('.error-cont').css('visibility', 'hidden');
-            });
+            }
+            
+        });
+
     }
 
     function create_info_panel(ip, location, timezone, isp) {
